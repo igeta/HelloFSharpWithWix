@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Language="1041" Codepage="932"
+           Name="Hello F#" Version="1.0.0.0" Manufacturer="OreOre Corp."
+           UpgradeCode="70b58464-5acc-49ab-90fa-fdf0a224a357">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"
+             Languages="1041" SummaryCodepage="932"
+             Description="Hello F# v1.0 インストーラー"
+             Comments="こんにちはするだけのプログラムです。"
+             Manufacturer="OreOre Corp." />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+    <FeatureRef Id="ProductFeature" />
+	</Product>
+
+  <Fragment>
+    <Feature Id="ProductFeature" Title="Product Feature" Level="1">
+      <ComponentRef Id="FSharp.Core.dll" />
+      <ComponentRef Id="FSharp.Core.xml" />
+      <ComponentRef Id="HelloFSharp.exe" />
+      <ComponentRef Id="HelloFSharp.exe.config" />
+      <ComponentRef Id="HelloFSharp.XML" />
+      <ComponentRef Id="FSharp.Core.resources.dll" />
+
+      <ComponentRef Id="HelloFSharpShortcut" />
+
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+  </Fragment>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir" />
+	</Fragment>
+
+  <Fragment>
+    <DirectoryRef Id="TARGETDIR">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Hello FSharp">
+          <Component Id="FSharp.Core.dll" Guid="*">
+            <File Id="FSharp.Core.dll" Name="FSharp.Core.dll"
+                  Source="..\HelloFSharp\bin\Release\FSharp.Core.dll" KeyPath="yes" />
+          </Component>
+          <Component Id="FSharp.Core.xml" Guid="*">
+            <File Id="FSharp.Core.xml" Name="FSharp.Core.xml"
+                  Source="..\HelloFSharp\bin\Release\FSharp.Core.xml" KeyPath="yes" />
+          </Component>
+          <Component Id="HelloFSharp.exe" Guid="*">
+            <File Id="HelloFSharp.exe" Name="HelloFSharp.exe"
+                  Source="..\HelloFSharp\bin\Release\HelloFSharp.exe" KeyPath="yes" />
+          </Component>
+          <Component Id="HelloFSharp.exe.config" Guid="*">
+            <File Id="HelloFSharp.exe.config" Name="HelloFSharp.exe.config"
+                  Source="..\HelloFSharp\bin\Release\HelloFSharp.exe.config" KeyPath="yes" />
+          </Component>
+          <Component Id="HelloFSharp.XML" Guid="*">
+            <File Id="HelloFSharp.XML" Name="HelloFSharp.XML"
+                  Source="..\HelloFSharp\bin\Release\HelloFSharp.XML" KeyPath="yes" />
+          </Component>
+          <Component Id="FSharp.Core.resources.dll" Guid="*">
+            <File Id="FSharp.Core.resources.dll" Name="FSharp.Core.resources.dll"
+                  Source="..\HelloFSharp\bin\Release\ja\FSharp.Core.resources.dll" KeyPath="yes" />
+          </Component>
+        </Directory>
+      </Directory>
+    </DirectoryRef>
+  </Fragment>
+
+  <Fragment>
+    <DirectoryRef Id="TARGETDIR">
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="HelloFSharpProgramsFolder" Name="Hello F#">
+          <Component Id="HelloFSharpShortcut" Guid="*">
+            <Shortcut Id="HelloFSharpStartMenuShortcut" Name="Hello F#"
+                      Description="Hello F# はこんにちはするプログラムです。"
+                      Target="[INSTALLFOLDER]HelloFSharp.exe" WorkingDirectory="INSTALLFOLDER"/>
+            <RemoveFolder Id="HelloFSharpProgramsFolder" On="uninstall"/>
+            <RegistryValue Root="HKCU" Key="Software\OreOre\HelloFSharp"
+                           Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+          </Component>
+        </Directory>
+      </Directory>
+    </DirectoryRef>
+  </Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+		</ComponentGroup>
+	</Fragment>
+</Wix>
