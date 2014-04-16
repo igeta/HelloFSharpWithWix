@@ -143,9 +143,10 @@ GUID は世界中で一意でなければならない。そのため、自分の
 
 ```xml
 <Feature Id="ProductFeature" Title="Product Feature" Level="1">
+  :
   <ComponentRef Id="HelloFSharp.exe" />
   <ComponentRef Id="HelloFSharp.exe.config" />
-  <ComponentRef Id="HelloFSharp.XML" />
+  :
 </Feature>
 ```
 
