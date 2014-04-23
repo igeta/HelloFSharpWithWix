@@ -162,10 +162,10 @@ GUID は世界中で一意でなければならない。そのため、自分の
     <Component Id="HelloFSharpShortcut" Guid="*">
       <Shortcut Id="HelloFSharpStartMenuShortcut" Name="Hello F#"
                 Description="Hello F# はこんにちはするプログラムです。"
-                Target="[INSTALLFOLDER]HelloFSharp.exe" WorkingDirectory="INSTALLFOLDER"/>
-      <RemoveFolder Id="HelloFSharpProgramsFolder" On="uninstall"/>
+                Target="[INSTALLFOLDER]HelloFSharp.exe" WorkingDirectory="INSTALLFOLDER" />
+      <RemoveFolder Id="HelloFSharpProgramsFolder" On="uninstall" />
       <RegistryValue Root="HKCU" Key="Software\OreOre\HelloFSharp"
-                     Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+                     Name="installed" Type="integer" Value="1" KeyPath="yes" />
     </Component>
   </Directory>
 </Directory>
